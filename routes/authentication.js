@@ -35,14 +35,10 @@ exports.logout = function(req, res){
 }
 
 exports.createUser = function(req, res){
-  hmac = crypto.createHmac(algorithm, key);
-  // change to 'binary' if you want a binary digest
-  hmac.setEncoding('hex');
-  // write in the text that you want the hmac digest for
-  hmac.write(req.body.password);
-  // you cannot read from the stream until you call end()
-  hmac.end();
-  hash = hmac.read();
+  
+  //create password hash
+  hash = generateHash(req.body.password);
+
   var mail = req.body.username.toLowerCase();
   var user = new users({
     email        : mail,
@@ -54,16 +50,32 @@ exports.createUser = function(req, res){
     if(user_exists)
       return res.json({status:"error", message:"the user already exists"});
     if(!user_exists){
-      user.save( function(err){
+      user.save( function(err, user){
         if(err) 
         	return res.json({status:"error", message:"could not save new user"});
         req.logIn(user, function(err) {
           if (err) 
           	return res.json({status:"error", message:"error occured"});
-          // login success!
-      		return res.json({status:"ok", data:user});
+
+          //generate user api key
+          user.toObject();
+          hash = generateHash(user._id.toString());
+          users.findOneAndUpdate({_id:user._id}, {$set:{key:hash}}, function(err){});
+
+      		return res.redirect('/users');
         });
       });
     }
   });
 };
+
+function generateHash(text){
+  hmac = crypto.createHmac(algorithm, key);
+  // change to 'binary' if you want a binary digest
+  hmac.setEncoding('hex');
+  // write in the text that you want the hmac digest for
+  hmac.write(text);
+  // you cannot read from the stream until you call end()
+  hmac.end();
+  return  hmac.read();
+}

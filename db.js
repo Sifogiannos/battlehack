@@ -3,10 +3,14 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 
 var users = new Schema({
+	name				: String,
+	surname 		: String, 
 	email				: String,
 	password		: String,
 	company 		: String,
-	token				: String,
+	key					: String,
+	websiteURL 	: String,
+	imgPath 		: String,
 	campaings		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
 });
 
@@ -16,8 +20,10 @@ var campaigns = new Schema({
 	participants	: [{
 		user_id					: { type: Schema.Types.ObjectId, ref: 'users' },
 		remainingAmount	: Number,
-		paidAmount			: Number
+		paidAmount			: Number,
+		total 					: Number
 	}],
+	finalDate			: Date,
 	fundingGoal 	: Number,
 	funds					: Number,
 	subscribers 	: [String]
