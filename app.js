@@ -51,7 +51,7 @@ app.use('/users', user);
 app.use('/donations', donations);
 
 app.get('/client_token', braintree.client_token);
-app.post('/purchases', braintree.purchases);
+app.get('/purchases', braintree.purchases);
 
 //authentication
 app.get('/login', authentication.login);
