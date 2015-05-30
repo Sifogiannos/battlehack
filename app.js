@@ -63,6 +63,7 @@ app.post('/login',
     return res.json({status:"ok", data:req.user});
   }
 );
+
 app.get('/logout', authentication.logout);
 
 

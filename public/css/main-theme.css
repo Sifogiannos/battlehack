@@ -18,14 +18,27 @@
 }
 body {
     color: #313131;
-	background-color: #ecf0f1;
+	background-color: #e3e0e9;
     font-family: 'Helvetica',Arial,sans-serif;
     font-size: 16px;
     line-height: 28px;
 }
+nav{
+  display:inline-block;
+}
 ul{
 	margin: 0;
 	padding: 0;
+  list-style: none;
+}
+li{
+  list-style:none;
+  padding: 0;
+  margin: 0;
+  display:inline-block;
+}
+h1,h2,h3,h4,p{
+  margin: 0;
 }
 form{
 	text-align:left;
@@ -39,7 +52,99 @@ form input{
 	border-radius:4px;
 	outline:none;
 }
+.brand img{
+  height:60px;
+  margin-right:1em;
+}
 .info{
 	font-size:14px;
 	color:#b5b5b5;
+}
+.primary-color{
+  color:#49708a;
+}
+.bg-primary-color{
+  background-color:#49708a;
+  color:#fff;
+}
+.green-color{
+  color:#34a547;
+}
+.text-left{
+  text-align:left;
+}
+.text-right{
+  text-align:right;
+}
+.text-center{
+  text-align:center;
+}
+.right{
+  float:right;
+}
+.left{
+  float:left;
+}
+.big-text{
+  font-size:32px;
+}
+.button{
+  padding:6px 12px;
+  border:1px solid transparent;
+  outline:none;
+  border-radius:4px;
+  position:relative;
+}
+.button:hover{
+  top:2px;
+}
+.button:active{
+  top:4px;
+}
+.button-primary-o{
+  color:#49708a;
+  background-color:transparent;
+  border-color:#49708a;
+}
+.brand{
+  display:inline-block;
+}
+.card{
+  width:100%;
+  padding: 0 !important;
+}
+.card .cover{
+  background-image: linear-gradient(rgba(95,173,255, 0.6), rgba(95,173,255, 0.6)), url("/img/card-cover.jpg");
+  background-size:cover;
+  min-height:125px;
+  position:relative;
+  margin-bottom:55px;
+}
+.card-profile{
+  display:table;
+  vertical-align: middle;
+  width:100%;
+  position:absolute;
+  bottom:-45px;
+  padding:10px;
+}
+.card-logo{
+  display:table-cell;
+  vertical-align: middle;
+}
+.card-logo img{
+  height:100px;
+  width:100px;
+}
+.card-description{
+  display:table-cell;
+  vertical-align: middle;
+  padding:0 10px;
+}
+.card-title{
+  font-size:20px;
+  color:#fff;
+}
+.card-user{
+  color:#939393;
 }
