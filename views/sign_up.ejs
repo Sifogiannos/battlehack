@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name = "viewport"  content="minimal-ui width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0">
+    <title>PanelSensor | Create your account</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="css/dashboard.css"> -->
+    <link rel="stylesheet" type="text/css" href="/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/css/main-theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" alt="Event app">
+	<link rel="icon" href="/img/favicon.png" type="image/png" alt="Audience interaction app">
+	<link rel="icon" sizes="32x32" href="/img/favicon-32.png" type="image/png" alt="Panelsensor">
+	<link rel="icon" sizes="96x96" href="/img/favicon-96.png" type="image/png" alt="Audience interaction app">
+  </head>
+
+  <body class="">
+	<div class="container">
+		<div class="login-wrapper">
+			<div class="bg-prm-color brand">
+				<img src="/img/bg_brand.png" alt="panelsensor logo">
+			</div>
+			<p>Sign up to get your account</p>
+			<form class="js-form" action="/login" method="post">
+
+				<input type="email" id="mail" name="username" pattern="[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" placeholder="Email" required>
+				<input type="password" name="password" placeholder="Password" required>
+				<button type="submit" class="bg-prm-color">SIGN UP</button>
+			</form>
+			<div class="buttons">
+				<a href="/">Go back to Login page</a>
+			</div>
+		</div>
+		<div class="support-message ">
+			<img src="https://scontent-mxp.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/10987626_10206255485325239_5786928364370900177_n.jpg?oh=fbc7aab5e3ca8398d5289920f0e6c007&oe=557DC721" alt="">
+			<div class="bubble-speech animated bounceIn">
+				<p>We are now on open beta ! </br> Having questions? <a href="mailto:hello@panelsensor.com">contact us</a> to help you!</p>
+			</div>
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/js/libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/libs/olark.js"></script>
+	<script>
+		$(function () {
+			$("#error").hide();
+			$('form').on('submit', function(event) {
+				event.preventDefault();
+					$.ajax({
+						url: '/create_user',
+						type: 'post',
+						data: $(this).serializeArray(),
+					})
+					.done(function(data) {
+						if(data.data=="User already exists"){
+							$("#error").show();
+							$("#error").html("User already exists");
+
+						}
+						else if(data.data=="Invalide promo code"){
+							$("#error").show();
+							$("#error").html("Invalid beta code. If you havent got an invite, request one <a href='http://PanelSensor.me'>here</a>");
+						}
+						else{
+							window.location.href="/";
+						}
+				});
+			});
+		});
+	</script>
+  </body>
+
+</html>
