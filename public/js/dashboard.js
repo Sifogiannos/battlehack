@@ -1,3 +1,43 @@
+function lQ (selector) {
+	return document.querySelector(selector);
+}
+function Element (args) {
+	var el = document.createElement(args.tag);
+	el.textContent = args.text || "";
+	el.className = args.class || "";
+	return el;
+}
+var ajax = function (args) {
+
+    var jqXHR = new XMLHttpRequest();
+
+    jqXHR.onreadystatechange = function () {
+
+        if (jqXHR.readyState == 4) {
+            if (jqXHR.status == 200) {
+                if (args.success instanceof Function){
+                    args.success(jqXHR);
+                }
+            }
+            else {
+                if (args.error instanceof Function){
+                    args.error(jqXHR);
+                }
+            }
+            if (args.complete instanceof Function) {
+                args.complete(jqXHR);
+            }
+        }
+    }
+
+    jqXHR.open(args.type, args.url, true);
+
+    if (args.type == 'POST')
+        jqXHR.setRequestHeader('Content-type',
+            'application/x-www-form-urlencoded');
+
+    jqXHR.send(args.data);
+};
 (function(){
 
 	var payButton = document.getElementById('payButton');
@@ -12,6 +52,90 @@
 		braintreeEl.style.display = 'block';
 		paymentContainer.style.display = 'none';
 	}
+
+	// Populate dashboard data from server
+	ajax({
+		url: '/user_info',
+	 	success: function () {
+			console.info('success');
+		},
+		complete: function () {
+			console.info('complete');
+		},
+		error: function () {
+			console.info('error');
+		}
+	});
+
+	var user = {
+		name				: 'Cristiano',
+		surname 		: 'Betta',
+		email				: 'professor@x.com',
+		company 		: 'PayPal',
+		key					: '1234',
+		tokenLastActive : new Date(),
+		websiteURL 	: 'http://cristianobetta.com',
+		imgPath 		: 'https://avatars1.githubusercontent.com/u/7718?v=3&s=400',
+		activity : [{
+			_id 		: 0,
+			title 	: 'yolo',
+			when  	: new Date()
+		},{
+			_id 		: 0,
+			title 	: 'yolo',
+			when  	: new Date()
+		},{
+			_id 		: 0,
+			title 	: 'yolo',
+			when  	: new Date()
+		}],
+		remainingAmount: 100,
+		paidAmount: 10000,
+		campaign: 	{
+				title					: 'Grow Hair Like U Just Don\'t Care',
+				description		: 'Plz?',
+				finalDate			: new Date('6/9/2015'),
+				campaignCover	: '',
+				charity:{
+					logo 			: 'https://avatars1.githubusercontent.com/u/7718?v=3&s=400',
+					name 			: 'Make A Wish',
+					contact 	: '090-0000000000',
+				},
+				fundingGoal 	: 3000,
+				funds					: 2500,
+				subscribers 	: [{}],
+				isActive			: {type: true, default: true }
+			}
+	}
+
+
+	var campaign = user.campaign;
+	lQ('.card-logo img').src = campaign.charity.logo;
+	var url = "http://screenshots.en.sftcdn.net/en/scrn/189000/189271/minecraft-10-700x393.jpg";
+	var bImg = 'linear-gradient(rgba(95,173,255, 0.6), rgba(95,173,255, 0.6)), url(' + url + ')';
+	lQ('.cover').style['background-image'] = bImg;
+	lQ('.card-title').textContent = campaign.title;
+	lQ('.card-user').textContent = 'By ' + campaign.charity.name;
+	lQ('.days-remaining h2').textContent = moment(campaign.finalDate).diff(Date.now(), 'days');
+	lQ('.funds-remaining span').textContent = '$ ' + (campaign.fundingGoal - campaign.funds);
+
+	var apiIsActive = user.tokenLastActive !== undefined &&
+		moment(new Date()).diff(new Date(user.tokenLastActive), 'weeks') < 2;
+	lQ('.api-status span').textContent = apiIsActive ? 'connected' : 'inactive'
+	lQ('.api-status span').className = 'right ' + (apiIsActive ? 'green-color' : 'red-color');
+	lQ('.backers span').textContent = user.activity.length;
+	lQ('.funds-raised span').textContent = '$ ' + user.paidAmount;
+
+	// Activity shit
+	var ul = lQ('.activity-list');
+	user.activity.forEach(function (item) {
+		var li = Element({
+			tag: 'li',
+			text: 'A user donated $1 through your website'
+		});
+		ul.appendChild(li);
+	});
+
 })();
 
 // We generated a client token for you so you can copy and paste this code
