@@ -1,0 +1,41 @@
+.lb-widget{
+	position:relative;
+}
+.lb-label{
+	font-weight: normal;
+}
+.lb-checked .lb-label{
+}
+.lb-button{
+	padding:6px 12px;
+	border:1px solid #689bf7;
+	outline:none;
+	color:#689bf7;
+	font-size:14px;
+	border-radius:4px;
+	background-color:transparent;
+	position:relative;
+}
+.lb-button:hover{
+	top:2px;
+}
+.lb-button:active{
+	top:4px;
+}
+.lb-checked .lb-button{
+	border-color: #1ed32a;
+	color:#1ed32a;
+}
+.lb-checked .lb-button:hover > i{
+	display:none;
+}
+.lb-checked .lb-button:hover{
+	border-color: #ff2d5e;
+	color:#ff2d5e;
+}
+.lb-button > .cancel {
+	display:none;
+}
+.lb-checked .lb-button:hover > .cancel{
+	display:inline-block;
+}
