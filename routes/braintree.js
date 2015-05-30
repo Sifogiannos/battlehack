@@ -24,20 +24,36 @@ exports.client_token = function(req, res){
   });
 };
 
-exports.purchases = function(req, res){
+exports.authorize = function(req, res){
 
-  var nonce = token;//req.body.payment_method_nonce;
-  var amount = "10.00"; //req.body.amount;
-  // Use payment method nonce here
-  gateway.transaction.sale({
-    amount: amount,
-    paymentMethodNonce: nonce,
-  }, function (err, result){
-    if(err){
-      return res.json(err);
-    }
-    if(result.success){
-    	return res.json({status:"ok", message:"you have been charged for" + amount});
-    }
+  var nonce = req.body.payment_method_nonce;
+  var campaignId = req.body.campaignId;
+  var newParticipant = {
+    user_id         : user._id,
+    remainingAmount : amount,
+    paidAmount      : 0,
+    total           : amount,
+    nonce           : nonce
+  };
+  campaigns.findOneAndUpdate({_id:campaignId}, {$push:{participants:newParticipant}}, function(err, campaign){
+    users.findOneAndUpdate({_id:req.user._id, campaigns:{$ne:campaign._id}},{$push:{campaigns:campaign._id}},function(err, user){
+      res.render('step3', {
+        key : user.key,
+        widget : "code"
+      });
+    });
   });
 };
+  // var amount = "10.00"; //req.body.amount;
+  // // Use payment method nonce here
+  // gateway.transaction.sale({
+  //   amount: amount,
+  //   paymentMethodNonce: nonce,
+  // }, function (err, result){
+  //   if(err){
+  //     return res.json(err);
+  //   }
+  //   if(result.success){
+  //     return res.json({status:"ok", message:"you have been charged for" + amount});
+  //   }
+  // });

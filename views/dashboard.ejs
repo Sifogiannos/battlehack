@@ -32,22 +32,22 @@
 					</div>
 					<div class="card-description">
 						<p class="card-title">Help us bring food and clothes to orfans</p>
-						<p class="card-user">By Hamogelo tou paidiou</p>						
+						<p class="card-user">By Hamogelo tou paidiou</p>
 					</div>
-				</div>				
+				</div>
 			</div>
 		</li>
 		<li class="days-remaining">
 			<p class="info text-center">DAYS TO GO</p>
 			<h2 class="primary-color text-center">10</h2>
 		</li>
-		<li class="days-remaining">
+		<li class="funds-remaining">
 			<p>Remaining until goal <span class="right">13.221 $</span></p>
 		</li>
 		<li class="section-divider">Your account</li>
-		<li><p>Your api is <span class="right green-color">connected</span></p></li>
-		<li><p>Backers through your site <span class="right">213</span></p></li>
-		<li><p>Amount due <span class="right">10.322$</span></p></li>
+		<li class="api-status"><p>Your api is <span class="right green-color">connected</span></p></li>
+		<li class="backers"><p>Backers through your site <span class="right">213</span></p></li>
+		<li class="funds-raised"><p>Total funds raised: <span class="right">10.322$</span></p></li>
 	</aside>
 	<section class="main-content">
 		<div class="notification">
@@ -66,10 +66,7 @@
 					</div>
 					<div class="widget-details">
 						<ul class="activity-list">
-							<li>A user donated $1 through your website</li>
-							<li>A user donated $1 through your website</li>
-							<li>A user donated $1 through your website</li>
-						</ul>						
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -82,18 +79,19 @@
 						<p><span class="big-text primary-color">128$</span></br>have been payed through your site</p>
 						<div class="pay-button">
 							<p>Would you like to pay now?</p>
-							<button id="payButton" class="button button-primary-o">Pay now</button>						
+							<button id="payButton" class="button button-primary-o">Pay now</button>
 						</div>
 					</div>
 					<div class="widget-braintree" id="braintree">
 						<form id="checkout" class="payment-form" method="post" action="/checkout"><div id="payment-form"></div><input type="submit" value="Pay $10"></form>
-					</div>			
+					</div>
 				</div>
 			</div>
 		</article>
 	</section>
 	</article>
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
+	<script src="js/lib/moment.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="js/lib/dropzone.js"></script>
 	<script src="https://js.braintreegateway.com/v2/braintree.js"></script>

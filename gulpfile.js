@@ -5,11 +5,11 @@ var gulp = require('gulp'),
 gulp.task('watch', function() {
 	console.log("should update")
   livereload.listen({start:true});
-  gulp.watch(['views/*.ejs','public/css/*.css'],['reload']);
+  gulp.watch(['views/*.ejs','public/css/*.css', 'public/js/*.js'],['reload']);
 });
 
 
 gulp.task('reload', function() {
-  gulp.src(['views/*.ejs','public/css/*.css'])
+  gulp.src(['views/*.ejs','public/css/*.css', 'public/js/*.js'])
     .pipe(livereload());
 });

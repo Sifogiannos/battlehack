@@ -26,6 +26,7 @@ var campaigns = new Schema({
 	participants	: [{
 		_id							: false,
 		user_id					: { type: Schema.Types.ObjectId, ref: 'users' },
+		nonce 					: String, 
 		remainingAmount	: Number,
 		paidAmount			: Number,
 		total 					: Number

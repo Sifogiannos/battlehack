@@ -1,0 +1,92 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/main-theme.css">
+	<link rel="stylesheet" href="/css/lb-progressbar.css">
+	<link rel="stylesheet" href="/css/lb-dropzone.css">
+	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/dashboard.css">
+	<link rel="stylesheet" href="/css/welcome.css">
+</head>
+<body>
+	<header class="bg-primary-color">
+		<div class="brand">
+			<img src="/img/logo.png" alt="Littlebit">
+		</div>
+		<nav>
+			<ul>
+				<li>Dashboard</li>
+			</ul>
+		</nav>
+		<div class="user-profile right">
+			<img src="/img/nick.jpg" alt="altbag">
+		</div>
+	</header>
+	<article class="steps">
+		<ul class="lb-progressbar">
+			<li class="active">Create account</li>
+			<li class="active">Select campaign</li>
+			<li>Finish</li>
+		</ul>
+		<div class="step clearfix">
+			<div class="input col-sm-12">	
+				<div class="card margin-center">
+					<div class="cover">
+						<div class="card-profile">
+							<div class="card-logo">
+								<img src="/img/hamogelo.png" alt="">
+							</div>
+							<div class="card-description">
+								<p class="card-title">Help us bring food and clothes to orfans</p>
+								<p class="card-user">By Hamogelo tou paidiou</p>
+							</div>
+						</div>
+					</div>
+					<div class="campaign-description">
+						<h3>Description</h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+					<div class="controls text-center">
+						<button id="selectCampaign" class="button button-primary-o">Select campaign</button>
+
+						<form id="checkout" class="hide" method="post" action="/authorize">
+						  <div id="payment-form"></div>
+						  <input type="hidden" name="campaignId" value="test">
+						  <input type="submit" class="button button-primary-o" value="Authorize payments">
+						</form>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="step clearfix hide">
+			<div class="input col-sm-4">
+				<label for="companyLogo">Logo3</label>
+	 			<form action="/file-upload" class="dropzone companyLogo" id="companyLogo"></form>
+	 			<p class="info text-left">recommended dimensions: 250x200</p>				
+			</div>
+			<div class="input col-sm-8">
+		 		<form id='js-companyDetails'>
+					<label for="companyName">Company name</label>
+					<input id="companyName" type="text">
+					<label for="companyName">asd</label>
+					<input id="companyName" type="text">			
+				</form>			
+			</div>
+		</div>
+<!-- 		<div class="controls text-right">
+			<button>Previous</button>
+			<button>Finish</button>
+			<button>Next</button>
+		</div> -->
+	</article>
+	<script src="js/lib/jquery-1.11.3.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+	<script src="js/profile.js"></script>
+	<script>
+	</script>
+</body>
+</html>
