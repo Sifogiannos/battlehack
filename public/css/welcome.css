@@ -13,3 +13,19 @@
 .companyLogo{
 	max-width:250px;
 }
+.last-step h2{
+	margin-bottom:1em;
+}
+.last-step input{
+	display:inline-block;
+	vertical-align: middle;
+	width:100%;
+	padding:.8em;
+	border:1px solid #c5c5c5;
+	border-radius:4px;
+	outline:none;
+	margin-bottom:1em;
+}
+.last-step p{
+	margin-bottom: 1em
+}

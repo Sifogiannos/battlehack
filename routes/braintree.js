@@ -29,16 +29,19 @@ exports.authorize = function(req, res){
 
   var nonce = req.body.payment_method_nonce;
   var campaignId = req.body.campaignId;
+  console.log(req.user);
+  console.log(campaignId);
   var newParticipant = {
-    user_id         : user._id,
-    remainingAmount : amount,
+    user_id         : req.user._id,
+    remainingAmount : 0,
     paidAmount      : 0,
-    total           : amount,
+    total           : 0,
     nonce           : nonce
   };
   campaigns.findOneAndUpdate({_id:campaignId}, {$push:{participants:newParticipant}}, function(err, campaign){
     users.findOneAndUpdate({_id:req.user._id, campaigns:{$ne:campaign._id}},{$push:{campaigns:campaign._id}},function(err, user){
-      res.render('step3', {
+      res.render('profile', {
+        step:3,
         key : user.key,
         widget : "code"
       });

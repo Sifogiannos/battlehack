@@ -9,7 +9,11 @@ router.get('/', function(req, res, next) {
 		if(req.user.campaigns.length>0){
 			return res.render('dashboard');
 		}
-		return res.render('profile');
+		return res.render('profile',{
+			step:2,
+			key:null,
+			widget:null
+		});
 	}
   return res.render('sign_in',{
     message: req.flash('error')

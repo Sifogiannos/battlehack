@@ -27,9 +27,18 @@
 		<ul class="lb-progressbar">
 			<li class="active">Create account</li>
 			<li class="active">Select campaign</li>
-			<li>Finish</li>
+			<% if(step==2){%>
+			<li >Finish</li>
+			<%}else if(step==3){%>
+			<li class="active">Finish</li>
+			<%}%>
+			
 		</ul>
+		<% if(step==2){%>
 		<div class="step clearfix">
+		<%}else{%>
+		<div class="step clearfix hide">
+		<%}%>
 			<div class="input col-sm-12">	
 				<div class="card margin-center">
 					<div class="cover">
@@ -54,33 +63,29 @@
 
 						<form id="checkout" class="hide" method="post" action="/authorize">
 						  <div id="payment-form"></div>
-						  <input type="hidden" name="campaignId" value="test">
+						  <input type="hidden" name="campaignId" value="556a4bf5424aef0dd0853b13">
 						  <input type="submit" class="button button-primary-o" value="Authorize payments">
 						</form>	
 					</div>
 				</div>
 			</div>
 		</div>
+		<% if(step==3){%>
+		<div class="step clearfix last-step">
+		<%}else{%>
 		<div class="step clearfix hide">
-			<div class="input col-sm-4">
-				<label for="companyLogo">Logo3</label>
-	 			<form action="/file-upload" class="dropzone companyLogo" id="companyLogo"></form>
-	 			<p class="info text-left">recommended dimensions: 250x200</p>				
-			</div>
-			<div class="input col-sm-8">
-		 		<form id='js-companyDetails'>
-					<label for="companyName">Company name</label>
-					<input id="companyName" type="text">
-					<label for="companyName">asd</label>
-					<input id="companyName" type="text">			
-				</form>			
+		<%}%>
+			<h2>You are almost done!</h2>
+			<p>Grab your api key</p>
+			<input type="text" value="<%=key%>" readonly>
+			<p>Paste this code on your checkout page to generate our cute button</p>
+			<blockquote>
+				<%=widget%>
+			</blockquote>
+			<div class="controls text-center">
+				<a href="/" class="button button-primary-o">See your dashboard!</a>
 			</div>
 		</div>
-<!-- 		<div class="controls text-right">
-			<button>Previous</button>
-			<button>Finish</button>
-			<button>Next</button>
-		</div> -->
 	</article>
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

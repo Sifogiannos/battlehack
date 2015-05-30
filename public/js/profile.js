@@ -1,6 +1,6 @@
 (function(){
 
-	var campaignId = 'test';
+	var campaignId = '556a4bf5424aef0dd0853b13';
 	var selectCampaign = document.getElementById('selectCampaign');
 	var braintreeForm = document.getElementById('checkout');
 	selectCampaign.addEventListener('click',loadBraintree);
