@@ -1,5 +1,6 @@
 var mongoose = require( 'mongoose' );
-
+var users = mongoose.model( 'users', users );
+var campaigns = mongoose.model( 'campaigns', campaigns );
 //braintree intergration
 var braintree = require('braintree');
 
