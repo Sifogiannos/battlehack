@@ -41,6 +41,7 @@ exports.createUser = function(req, res){
 
   var mail = req.body.username.toLowerCase();
   var user = new users({
+    company : req.body.company,
     email        : mail,
     password      : hash
   });
@@ -51,7 +52,7 @@ exports.createUser = function(req, res){
       return res.json({status:"error", message:"the user already exists"});
     if(!user_exists){
       user.save( function(err, user){
-        if(err) 
+        if(err)
         	return res.json({status:"error", message:"could not save new user"});
         req.logIn(user, function(err) {
           if (err) 

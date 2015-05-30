@@ -22,20 +22,27 @@ exports.client_token = function(req, res){
   });
 };
 
-exports.purchases = function(req, res){
+exports.authorize = function(req, res){
 
-  var nonce = 'nonce-from-the-client';//req.body.payment_method_nonce;
-  var amount = "10.00"; //req.body.amount;
-  // Use payment method nonce here
-  gateway.transaction.sale({
-    amount: amount,
-    paymentMethodNonce: nonce,
-  }, function (err, result){
-    if(err){
-      return res.json(err);
-    }
-    if(result.success){
-    	return res.json({status:"ok", message:"you have been charged for" + amount});
-    }
-  });
+  var nonce =req.body.payment_method_nonce;
+  var campaignId = req.body.campaignId;
+  // campaigns.findOneAndUpdate({_id:campaignId},{$push:{participants}},function(err,campaign){
+  //   users.findOneAndUpdate({_id:req.user._id},{$push:{campaigns:campaign._id}},function(err,user){
+
+  //   });
+  // });
+  return res.redirect('/'); 
 };
+  // var amount = "10.00"; //req.body.amount;
+  // // Use payment method nonce here
+  // gateway.transaction.sale({
+  //   amount: amount,
+  //   paymentMethodNonce: nonce,
+  // }, function (err, result){
+  //   if(err){
+  //     return res.json(err);
+  //   }
+  //   if(result.success){
+  //     return res.json({status:"ok", message:"you have been charged for" + amount});
+  //   }
+  // });

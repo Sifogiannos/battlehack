@@ -51,7 +51,7 @@ app.use('/users', user);
 app.use('/donations', donations);
 
 app.get('/client_token', braintree.client_token);
-app.post('/purchases', braintree.purchases);
+app.post('/authorize', braintree.authorize);
 
 //authentication
 app.get('/login', authentication.login);
@@ -60,7 +60,8 @@ app.post('/create_user', authentication.createUser);
 app.post('/login',
   passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
   function(req, res){
-    return res.json({status:"ok", data:req.user});
+    res.redirect('/');
+    //return res.json({status:"ok", data:req.user});
   }
 );
 

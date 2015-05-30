@@ -79,6 +79,9 @@ form input{
 .text-center{
   text-align:center;
 }
+.margin-center{
+  margin:0 auto;
+}
 .right{
   float:right;
 }
@@ -101,6 +104,10 @@ form input{
 .button:active{
   top:4px;
 }
+.button-primary{
+  color:#fff;
+  background-color:#49708a;
+}
 .button-primary-o{
   color:#49708a;
   background-color:transparent;
@@ -111,6 +118,7 @@ form input{
 }
 .card{
   width:100%;
+  max-width:480px;
   padding: 0 !important;
 }
 .card .cover{
@@ -119,6 +127,7 @@ form input{
   min-height:125px;
   position:relative;
   margin-bottom:55px;
+  border-radius:4px 4px 0 0;
 }
 .card-profile{
   display:table;
@@ -140,6 +149,7 @@ form input{
   display:table-cell;
   vertical-align: middle;
   padding:0 10px;
+  width:100%;
 }
 .card-title{
   font-size:20px;
@@ -147,4 +157,13 @@ form input{
 }
 .card-user{
   color:#939393;
+}
+.campaign-description{
+  padding:15px;
+  margin-bottom:15px;
+}
+.campaign-description h3{
+  margin-bottom:15px;
+  border-bottom:1px solid #ccc;
+  display:inline-block;
 }

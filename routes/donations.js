@@ -7,7 +7,7 @@ var users  = mongoose.model( 'users', users );
 var campaigns = mongoose.model( 'campaigns', campaigns );
 
 router.get('/', function(req, res){
-  var key = "69be8790377711d41dd9a07795f7677bc587cb1c";//req.body.api_key;
+  var key = "f863afbd7e8408c0e24e881a166b7add4fc699d3";//req.body.api_key;
   var amount = 1;//req.body.amount;
   users.findOne({key:key}, function(err, user){
   	if(err){

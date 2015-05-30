@@ -3,26 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name = "viewport"  content="minimal-ui width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0">
-    <title>PanelSensor | Login</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="css/dashboard.css"> -->
+    <title>LittleBit | Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/css/main-theme.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" alt="Event app">
-	<link rel="icon" href="/img/favicon.png" type="image/png" alt="Audience interaction app">
-	<link rel="icon" sizes="32x32" href="/img/favicon-32.png" type="image/png" alt="Panelsensor">
-	<link rel="icon" sizes="96x96" href="/img/favicon-96.png" type="image/png" alt="Audience interaction app">
   </head>
 
   <body class="">
 	<div class="container">
 		<div class="login-wrapper">
 			<div class="bg-prm-color brand">
-				<img src="/img/bg_brand.png" alt="panelsensor logo">
+				<img src="/img/logo.png" alt="littleBit logo">
 			</div>
-			<p>Login to your Panelsensor Account</p>
+			<p>Login to your LittleBit Account</p>
 			<% if (message!=""){%>
 				<span id="error" class="error"><%= message %></span>
 			<%}%>
@@ -32,19 +27,12 @@
 				<button class="bg-prm-color" type="submit">SIGN IN</button>
 			</form>
 			<div class="buttons">
-				<a href="/recover">Forgot your password?</a>
 				<a href="/signup" class="right">Dont have an account? <span class="snd-color">Get started</span></a>
 			</div>
 		</div>
-		<div class="support-message ">
-			<div class="bubble-speech animated bounceIn">
-				<p>If you have any questions <a href="mailto:support@panelsensor.com">contact us !</a></p>
-			</div>
-
-		</div>
 	</div>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="/js/libs/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			var emailInput = document.getElementById('email');
