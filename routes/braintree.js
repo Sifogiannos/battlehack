@@ -20,14 +20,18 @@ exports.client_token = function(req, res){
 
 exports.purchases = function(req, res){
 
-  var nonce = req.body.payment_method_nonce;
+  var nonce = "'nonce-from-the-client'";//req.body.payment_method_nonce;
+  var amount = "10.00"; //req.body.amount;
   // Use payment method nonce here
   gateway.transaction.sale({
-    amount: '10.00',
-    paymentMethodNonce: 'nonce-from-the-client',
+    amount: amount,
+    paymentMethodNonce: nonce,
   }, function (err, result){
-    if(err)
-      return res.json({status:"error", message:"could not do the transaction"});
-    return res.json(result);
+    if(err){
+      return res.json(err);
+    }
+    if(result.success){
+    	return res.json({status:"ok", message:"you have been charged for" + amount});
+    }
   });
 };

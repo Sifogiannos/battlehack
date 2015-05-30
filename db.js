@@ -11,7 +11,7 @@ var users = new Schema({
 	key					: String,
 	websiteURL 	: String,
 	imgPath 		: String,
-	campaings		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
+	campaigns		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
 });
 
 var campaigns = new Schema({

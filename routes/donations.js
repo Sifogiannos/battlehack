@@ -6,8 +6,7 @@ var mongoose = require( 'mongoose' );
 var users  = mongoose.model( 'users', users );
 var campaigns = mongoose.model( 'campaigns', campaigns );
 
-/* GET home page. */
-router.post('/', function(req, res) {
+router.post('/', function(req, res){
   var key = req.body.api_key;
   var amount = req.body.amount;
   users.findOne({key:key}, function(err, user){
@@ -15,21 +14,21 @@ router.post('/', function(req, res) {
   		return res.json({status:"error", message:"server error"});
   	}
   	if(!user){
-  		return res.json({status:"error", message:"No user with this key"});
+  		return res.json({status:"error", message:"No authorized key"});
   	}
 
   	campaigns.findOne({isActive:true}, function(err, campaign){
   		//update user if the campaign is already exists
   		users.findOneAndUpdate({_id:user._id, campaigns:{$ne:campaign._id}}, {$push:{campaigns:campaign._id}}, function(err){});
   		//update campaign 
-  		var campaign_iterator;
+  		var participant_iterator;
   		for(var i = 0; i<campaign.participants.length; i++){
-  			if(campaign.participants[i].equals(user._id)){
-  				campaign_iterator=i;
+  			if(campaign.participants[i].user_id.equals(user._id)){
+  				participant_iterator=i;
   			}
   		}
   		//push to campaign new participant
-  		if(!campaign_iterator){
+  		if(participant_iterator ==undefined){
   			var newParticipant = {
   				user_id					: user._id,
   				remainingAmount	: amount,
@@ -62,6 +61,6 @@ router.post('/', function(req, res) {
   		}
   	});
   });
-
 });
+
 module.exports = router;

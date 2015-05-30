@@ -8,9 +8,26 @@ var users  = mongoose.model( 'users', users );
 /* GET users listing. */
 router.get('/', function(req, res){
 	if(req.user){
-		users.findOne({_id:req.user.id}).populate('campaigns').lean().exec(function(err, user){
+
+		var populate = {path: 'campaigns', match: {isActive: true}, select:'participants'};
+		
+		users.findOne({_id:req.user.id}).populate(populate).lean().exec(function(err, user){
 			delete user._id;
 			delete user.password;
+
+			var amountToPay = 0;
+			//find the remainig amount to pay for the active campaign 
+			if(user.campaigns.length > 0){
+				for(var i = 0; i<user.campaigns[0].participants.length; i++){
+	  			if(user.campaigns[0].participants[i].user_id.equals(user._id)){
+	  				amountToPay=user.campaigns[0].participants[i].remainingAmount;
+	  			}
+	  		}
+			}
+
+			delete user.campaigns;
+			user.amount =  amountToPay;
+
 			return res.json({status:"ok", data:user});
 		});
 	}else{
