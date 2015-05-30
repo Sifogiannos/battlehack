@@ -23,9 +23,8 @@
     var btn = El({
       tag: 'button',
       text: 'button',
-      class:'lb-btn'
+      class:'lb-button'
     });
-    widget.appendChild(btn);
     widget.appendChild(
       El({
         tag: 'label',
@@ -33,6 +32,7 @@
         class: 'lb-label'
       })
     );
+    widget.appendChild(btn);
     // Setup click handler
     btn.addEventListener('click', function () {
       didConfirm = !didConfirm;
