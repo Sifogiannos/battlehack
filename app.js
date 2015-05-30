@@ -22,6 +22,7 @@ var braintree = require('./routes/braintree');
 
 var routes = require('./routes/index');
 var user = require('./routes/users');
+var donations = require('./routes/donations');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', user);
+app.use('/donations', donations);
 
 app.get('/client_token', braintree.client_token);
 app.post('/purchases', braintree.purchases);
