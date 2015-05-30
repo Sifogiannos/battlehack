@@ -14,7 +14,7 @@ var users = new Schema({
 	imgPath 		: String,
 	campaigns		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
 	activity : [{
-		_id 		: false
+		_id 		: false,
 		title 	: String,
 		when  	: Date
 	}]

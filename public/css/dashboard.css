@@ -106,3 +106,6 @@ li.section-divider{
 .payment-form{
 	padding:1em;
 }
+.widget-braintree{
+	display:none;
+}
