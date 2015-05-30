@@ -12,6 +12,11 @@ var users = new Schema({
 	websiteURL 	: String,
 	imgPath 		: String,
 	campaigns		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
+	activity : [{
+		_id 		: false
+		title 	: String,
+		when  	: Date
+	}]
 });
 
 var campaigns = new Schema({
@@ -24,6 +29,12 @@ var campaigns = new Schema({
 		total 					: Number
 	}],
 	finalDate			: Date,
+	campaignCover	: String,
+	charity:{
+		logo 			: String,
+		name 			: String,
+		contact 	: String,
+	}
 	fundingGoal 	: Number,
 	funds					: Number,
 	subscribers 	: [String],
