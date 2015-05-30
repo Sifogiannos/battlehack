@@ -12,7 +12,7 @@ var users = mongoose.model( 'users', users );
 
 exports.login = function(req, res){
   if(req.user)
-    return res.json({status:"ok", data:req.user});
+    return res.redirect('/');
   //if not logged in sign in
   res.render('sign_in',{
     message: req.flash('error')
@@ -21,7 +21,7 @@ exports.login = function(req, res){
 
 exports.signup = function(req, res){
   if(req.user)
-    return res.json({status:"ok", data:req.user});
+    return res.redirect('/');
   return res.render('sign_up');
 };
 
@@ -60,9 +60,9 @@ exports.createUser = function(req, res){
           //generate user api key
           user.toObject();
           hash = generateHash(user._id.toString());
-          users.findOneAndUpdate({_id:user._id}, {$set:{key:hash}}, function(err){});
+          users.findOneAndUpdate({_id:user._id}, {$set:{key:hash, tokenLastActive:Date.now()}}, function(err){});
 
-      		return res.redirect('/users');
+      		return res.redirect('/');
         });
       });
     }

@@ -6,9 +6,9 @@ var mongoose = require( 'mongoose' );
 var users  = mongoose.model( 'users', users );
 var campaigns = mongoose.model( 'campaigns', campaigns );
 
-router.post('/', function(req, res){
-  var key = req.body.api_key;
-  var amount = req.body.amount;
+router.get('/', function(req, res){
+  var key = "69be8790377711d41dd9a07795f7677bc587cb1c";//req.body.api_key;
+  var amount = 1;//req.body.amount;
   users.findOne({key:key}, function(err, user){
   	if(err){
   		return res.json({status:"error", message:"server error"});
@@ -19,6 +19,8 @@ router.post('/', function(req, res){
 
   	campaigns.findOne({isActive:true}, function(err, campaign){
   		//update user if the campaign is already exists
+  		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()}; 
+  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity}}, function(err){});
   		users.findOneAndUpdate({_id:user._id, campaigns:{$ne:campaign._id}}, {$push:{campaigns:campaign._id}}, function(err){});
   		//update campaign 
   		var participant_iterator;
@@ -42,7 +44,7 @@ router.post('/', function(req, res){
 			  	if(!campaign){
 			  		return res.json({status:"error", message:"No campaign found"});
 			  	}
-			  	return res.json({status:"ok", message:"you have added "+amount+" to campaign"});
+			  	return res.json({status:"ok", message:"you have added " + amount + " $ to campaign"});
   			});
   		}else{
   			var newProperties = {
