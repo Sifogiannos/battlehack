@@ -1,0 +1,15 @@
+.steps{
+	width:100%;
+	max-width:960px;
+	margin:0 auto;
+	text-align: left;
+	background-color: #fff;
+	padding:2em;
+	border-radius:4px;
+}
+.step{
+	width:100%;
+}
+.companyLogo{
+	max-width:250px;
+}
