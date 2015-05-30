@@ -9,6 +9,7 @@ var users = new Schema({
 	password		: String,
 	company 		: String,
 	key					: String,
+	tokenLastActive : Date,
 	websiteURL 	: String,
 	imgPath 		: String,
 	campaigns		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
