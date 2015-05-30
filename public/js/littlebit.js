@@ -23,7 +23,7 @@
     var btn = El({
       tag: 'button',
       text: 'button',
-      class:'lb-btn'
+      class:'lb-button'
     });
     widget.appendChild(btn);
     widget.appendChild(
