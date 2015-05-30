@@ -12,7 +12,7 @@ var users = new Schema({
 	tokenLastActive : Date,
 	websiteURL 	: String,
 	imgPath 		: String,
-	campaigns		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }]
+	campaigns		: [{ type: Schema.Types.ObjectId, ref: 'campaigns' }],
 	activity : [{
 		_id 		: false,
 		title 	: String,
@@ -35,7 +35,7 @@ var campaigns = new Schema({
 		logo 			: String,
 		name 			: String,
 		contact 	: String,
-	}
+	},
 	fundingGoal 	: Number,
 	funds					: Number,
 	subscribers 	: [String],
