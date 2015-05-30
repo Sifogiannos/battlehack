@@ -1,0 +1,108 @@
+header{
+	padding:0 1em;
+}
+.user-profile{
+	display:inline-block;
+	vertical-align: middle;
+}
+.user-profile img{
+	height:50px;
+	border-radius:50%;
+	border:2px solid #6a91ab;
+	margin-top:3px;
+}
+.side-section{
+    float: left;
+    position: absolute;
+    width: 420px;
+    padding:0 15px;
+}
+.main-content{
+	padding:15px;
+	float:left;
+    margin-left: 420px;
+    overflow: hidden;
+    position: absolute;
+}
+.notification{
+	display:table;
+	width:100%;
+	background-color:#66a7e9;
+	color:#fff;
+	border-radius:4px;
+}
+.notification-icon{
+	display:table-cell;
+	vertical-align: middle;
+	background-color:#49708a;
+	padding:10px;
+	text-align:center;
+	border-radius:3px 0 0 3px;
+}
+.notification-text{
+	display:table-cell;
+	vertical-align: middle;
+	padding:.5em;
+}
+.side-section h3{
+	padding:15px;
+	font-size:18px;
+	text-transform: uppercase;
+	color:#b3b3b3;
+	background-color: #fff;
+}
+.side-section li{
+	border-bottom:1px solid #ccc;
+	width:100%;
+	background-color: #fff;
+	padding:10px;
+}
+.days-remaining h2{
+	margin-bottom:5px;
+}
+li.section-divider{
+	background-color: #eeeeec;
+	color:#999999;
+	font-size:14px;
+	text-transform: uppercase;
+	font-weight:bold;
+	padding:1em;
+}
+.widget-row{
+	margin-top:30px;
+}
+.widget{
+	background-color: #fff;
+	height:250px;
+	overflow:hidden;
+	position:relative;
+	border-radius:4px;
+}
+.widget-title{
+	background-color:#eeeeec;
+	font-size:18px;
+	padding:15px;
+}
+.widget-details{
+	overflow:auto;
+/*	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;*/
+}
+.widget-details ul li{
+	padding:15px;
+	width:100%;
+}
+.amount-due{
+	margin-top:2em;
+}
+.pay-button{
+	margin-top:1em;
+	color:#838383;
+	font-size:14px;
+}
+.payment-form{
+	padding:1em;
+}
