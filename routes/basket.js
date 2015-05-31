@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
 	if (req.body.amount != 0) {
-		lb = new littlebit('36740813f1eff35c9a905f8b1f2606896bd13dcd');
+		lb = new littlebit('f95b6331e0635ddc21aa815df6b71be61f63186a');
 		lb.donate(req.body.amount);
 		return res.json({status:"ok", message:"you have donated $" + req.body.amount});
 	}
