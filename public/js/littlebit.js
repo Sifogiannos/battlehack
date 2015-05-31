@@ -22,13 +22,13 @@
     });
     var btn = El({
       tag: 'button',
-      text: 'button',
+      text: 'Donate $1 ',
       class:'lb-button'
     });
     widget.appendChild(
       El({
         tag: 'label',
-        text: 'label',
+        text: 'Help LittleBit raise money for a good cause',
         class: 'lb-label'
       })
     );
