@@ -8,7 +8,6 @@ var campaigns = mongoose.model( 'campaigns', campaigns );
 
 router.post('/', function(req, res){
   var key = req.body.api_key;
-  console.log('key', key)
   var amount = req.body.amount;
   users.findOne({key:key}, function(err, user){
   	if(err){
