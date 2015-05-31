@@ -7,8 +7,8 @@ var users  = mongoose.model( 'users', users );
 var campaigns = mongoose.model( 'campaigns', campaigns );
 
 router.post('/', function(req, res){
-  var key = "f863afbd7e8408c0e24e881a166b7add4fc699d3";//req.body.api_key;
-  var amount = 1;//req.body.amount;
+  var key = req.body.api_key;
+  var amount = req.body.amount;
   users.findOne({key:key}, function(err, user){
   	if(err){
   		return res.json({status:"error", message:"server error"});
@@ -19,10 +19,10 @@ router.post('/', function(req, res){
 
   	campaigns.findOne({isActive:true}, function(err, campaign){
   		//update user if the campaign is already exists
-  		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()}; 
+  		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()};
   		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity}}, function(err){});
   		users.findOneAndUpdate({_id:user._id, campaigns:{$ne:campaign._id}}, {$push:{campaigns:campaign._id}}, function(err){});
-  		//update campaign 
+  		//update campaign
   		var participant_iterator;
   		for(var i = 0; i<campaign.participants.length; i++){
   			if(campaign.participants[i].user_id.equals(user._id)){
