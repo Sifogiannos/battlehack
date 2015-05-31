@@ -31,21 +31,7 @@ router.post('/', function(req, res){
   		}
   		//push to campaign new participant
   		if(participant_iterator == undefined){
-  			var newParticipant = {
-  				user_id					: user._id,
-  				remainingAmount	: amount,
-  				paidAmount			: 0,
-  				total						: amount
-  			};
-  			campaigns.findOneAndUpdate({_id:campaign._id}, {$push:{participants:newParticipant}}, function(err, campaign){
-  				if(err){
-			  		return res.json({status:"error", message:"server error"});
-			  	}
-			  	if(!campaign){
-			  		return res.json({status:"error", message:"No campaign found"});
-			  	}
-			  	return res.json({status:"ok", message:"you have added " + amount + " $ to campaign"});
-  			});
+  			return res.json({status:"error", message:"No campaign found"});
   		}else{
   			var newProperties = {
   				"participants.$.remainingAmount"	: amount,
