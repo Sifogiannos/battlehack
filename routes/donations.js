@@ -30,7 +30,7 @@ router.post('/', function(req, res){
   	campaigns.findOne({isActive:true}, function(err, campaign){
   		//update user if the campaign is already exists
   		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()};
-  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity}}, function(err){});
+  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity, tokenLastActive:Date.now()}}, function(err){});
   		users.findOneAndUpdate({_id:user._id, campaigns:{$ne:campaign._id}}, {$push:{campaigns:campaign._id}}, function(err){});
   		
   		//update campaign

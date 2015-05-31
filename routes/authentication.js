@@ -61,7 +61,7 @@ exports.createUser = function(req, res){
           //generate user api key
           user.toObject();
           hash = generateHash(user._id.toString());
-          users.findOneAndUpdate({_id:user._id}, {$set:{key:hash, tokenLastActive:Date.now()}}, function(err){});
+          users.findOneAndUpdate({_id:user._id}, {$set:{key:hash}}, function(err){});
 
       		return res.redirect('/');
         });
