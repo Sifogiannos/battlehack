@@ -30,14 +30,13 @@ router.post('/', function(req, res){
   	}
 
   	campaigns.findOne({isActive:true}, function(err, campaign){
-  		
+
   		if(!campaign){
   			return res.json({status:"error", message:"No campaign active"});
   		}
   		//update user if the campaign is already exists
   		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()};
-  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity, tokenLastActive:Date.now()}}, function(err){});
-  		users.findOneAndUpdate({_id:user._id, campaigns:{$ne:campaign._id}}, {$push:{campaigns:campaign._id}}, function(err){});
+  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity},$set:{tokenLastActive:Date.now()}}, function(err){});
   		
   		//update campaign
   		var participant_iterator;
@@ -48,31 +47,32 @@ router.post('/', function(req, res){
   				nonce = campaign.participants[i].nonce;
   			}
   		}
-
+      console.log(nonce);
   		//push to campaign new participant
   		if(participant_iterator == undefined){
   			return res.json({status:"error", message:"No campaign found"});
   		}else{
-
+        console.log(amount);
 			  // Use payment method nonce here
 			  gateway.transaction.sale({
 			    amount: amount,
-			    paymentMethodNonce: nonce,
+			    paymentMethodNonce: nonce
 			  }, function (err, result){
 			    if(err){
 			      return res.json(err);
 			    }
+          console.log(result);
 			    //if transaction success
 			    if(result.success){
-
+            console.log("success");
 		  			var newProperties = {
 		  				"participants.$.paidAmount"	: amount,
 		  				"participants.$.total"			: amount,
-		  				fundingGoal 								: amount*(-1),
 		  				funds												: amount
 		  			};
 
 		  			campaigns.findOneAndUpdate({_id:campaign._id, "participants.user_id":user._id}, {$inc:newProperties}, function(err, campaign){
+              console.log(campaign.funds);
 		  				if(err){
 					  		return res.json({status:"error", message:"server error"});
 					  	}

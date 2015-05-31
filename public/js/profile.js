@@ -11,7 +11,7 @@
 		})
 		.done(function(response) {
 			var clientToken = response;
-			braintree.setup(clientToken, "dropin", {
+			braintree.setup(clientToken, "paypal", {
 			  container: "payment-form",
 			  singleUse: false
 			});
