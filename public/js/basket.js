@@ -11,36 +11,11 @@ donate.addEventListener('cancel', function () {
 });
 var checkout = document.querySelector('.button-primary');
 checkout.addEventListener('click', function () {
-  ajax({
-    url: '/checkout',
+  $.ajax({
+    url: '/basket',
     type: 'POST',
     data: {
-      donate: willDonate
+      amount: willDonate ? 1 : 0,
     },
   })
 });
-function ajax (args) {
-    var jqXHR = new XMLHttpRequest();
-    jqXHR.onreadystatechange = function () {
-        if (jqXHR.readyState == 4) {
-            if (jqXHR.status == 200) {
-                if (args.success instanceof Function){
-                    args.success(jqXHR);
-                }
-            }
-            else {
-                if (args.error instanceof Function){
-                    args.error(jqXHR);
-                }
-            }
-            if (args.complete instanceof Function) {
-                args.complete(jqXHR);
-            }
-        }
-    }
-    jqXHR.open(args.type, args.url, true);
-    if (args.type == 'POST')
-        jqXHR.setRequestHeader('Content-type',
-            'application/x-www-form-urlencoded');
-    jqXHR.send(JSON.stringify(args.data));
-};
