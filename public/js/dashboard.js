@@ -113,7 +113,7 @@ var ajax = function (args) {
 			moment(new Date()).diff(new Date(user.tokenLastActive), 'weeks') < 2;
 		lQ('.api-status span').textContent = apiIsActive ? 'connected' : 'inactive';
 		lQ('.notification-text .amount').textContent = '$ ' + user.paidAmount;
-		lQ('.notification-text .charity').textContent = user.charity.name;
+		lQ('.notification-text .charity').textContent = campaign.charity.name;
 		lQ('.api-status span').className = 'right ' + (apiIsActive ? 'green-color' : 'red-color');
 		lQ('.backers span').textContent = user.activity.length;
 		lQ('.funds-raised span').textContent = '$ ' + user.paidAmount;
