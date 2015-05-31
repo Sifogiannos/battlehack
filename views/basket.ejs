@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="/css/lb-dropzone.css">
 	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/dashboard.css">
-	<link rel="stylesheet" href="/css/welcome.css">
+	<link rel="stylesheet" href="/css/basket.css">
 </head>
 <body>
 	<header class="bg-primary-color">
@@ -16,81 +16,29 @@
 		</div>
 		<nav>
 			<ul>
-				<li>Dashboard</li>
+				<li>Payment Template</li>
 			</ul>
 		</nav>
 		<div class="user-profile right">
-			<img src="/img/nick.jpg" alt="altbag">
+			<a href="#">Checkout</a>
+			<i class="fa fa-shopping-cart" style="margin-top:15px;font-size:24px"></i>
 		</div>
 	</header>
-	<article class="steps">
-		<ul class="lb-progressbar">
-			<li class="active">Create account</li>
-			<li class="active">Select campaign</li>
-			<% if(step==2){%>
-			<li >Finish</li>
-			<%}else if(step==3){%>
-			<li class="active">Finish</li>
-			<%}%>
-			
+	<article class="container">
+		<h3 class="basket-title">Checkout basket</h3>
+		<ul class="basket-items" id="basket-items">
+			<li>Axe trophy <span class="right">Priceless</span></li>
+			<li>Xbox console <span class="right">$250</span></li>
+			<li>Adafruit module <span class="right">$50</span></li>
+			<li id="total" class="total">&nbsp;<span class="right">Total : Priceless+$300</span></li>
 		</ul>
-		<% if(step==2){%>
-		<div class="step clearfix">
-		<%}else{%>
-		<div class="step clearfix hide">
-		<%}%>
-			<div class="input col-sm-12">	
-				<div class="card margin-center">
-					<div class="cover">
-						<div class="card-profile">
-							<div class="card-logo">
-								<img src="/img/hamogelo.png" alt="">
-							</div>
-							<div class="card-description">
-								<p class="card-title">Help us bring food and clothes to orfans</p>
-								<p class="card-user">By Hamogelo tou paidiou</p>
-							</div>
-						</div>
-					</div>
-					<div class="campaign-description">
-						<h3>Description</h3>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						</p>
-					</div>
-					<div class="controls text-center">
-						<button id="selectCampaign" class="button button-primary-o">Select campaign</button>
-
-						<form id="checkout" class="hide" method="post" action="/authorize">
-						  <div id="payment-form"></div>
-						  <input type="hidden" name="campaignId" value="556a541a424aef0dd0853b14">
-						  <input type="submit" class="button button-primary-o" value="Authorize payments">
-						</form>	
-					</div>
-				</div>
-			</div>
-		</div>
-		<% if(step==3){%>
-		<div class="step clearfix last-step">
-		<%}else{%>
-		<div class="step clearfix hide">
-		<%}%>
-			<h2>You are almost done!</h2>
-			<p>Grab your api key</p>
-			<input type="text" value="<%=key%>" readonly>
-			<p>Paste this code on your checkout page to generate our cute button</p>
-			<blockquote>
-				<%=widget%>
-			</blockquote>
-			<div class="controls text-center">
-				<a href="/" class="button button-primary-o">See your dashboard!</a>
-			</div>
+		<div class="controls text-right">
+			<button class="button button-primary"><i class="fa fa-shopping-cart"></i> Checkout </button>
 		</div>
 	</article>
 	<script src="js/lib/jquery-1.11.3.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
-	<script src="js/profile.js"></script>
+	<script src="js/basket.js"></script>
 	<script>
 	</script>
 </body>

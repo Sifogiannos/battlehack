@@ -1,0 +1,17 @@
+.basket-items li{
+	display:block;
+	padding:.5em 0;
+}
+.basket-items li:not(:last-child){
+	border-bottom:1px solid #ccc;
+}
+.basket-items{
+	background-color: #fff;
+	padding: 1em;
+}
+.basket-title{
+	margin:1em 0;
+}
+.controls{
+	margin:1em 0;
+}
