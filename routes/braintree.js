@@ -11,8 +11,6 @@ var gateway = braintree.connect({
   privateKey: "3507e86793b7bf1d5b35803558bed1a9"
 });
 
-// var token = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJiMTg0MDA0YmExN2E4YjM0MzNmZmVjNDkzYzE5NmNlZjRkMzM1NjZjMWEyZjA5NzcwMWFiZjQxZWJjNjcxMDM3fGNyZWF0ZWRfYXQ9MjAxNS0wNS0zMFQyMjo1NDo0OS4yMTc3MjczMDIrMDAwMFx1MDAyNmN1c3RvbWVyX2lkPTMyMTMwNTQxXHUwMDI2bWVyY2hhbnRfaWQ9MzJ5cW1xem00andxZjI2OVx1MDAyNnB1YmxpY19rZXk9cnBtemRnbnJ0Mm56eDJiMyIsImNvbmZpZ1VybCI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb206NDQzL21lcmNoYW50cy8zMnlxbXF6bTRqd3FmMjY5L2NsaWVudF9hcGkvdjEvY29uZmlndXJhdGlvbiIsImNoYWxsZW5nZXMiOltdLCJlbnZpcm9ubWVudCI6InNhbmRib3giLCJjbGllbnRBcGlVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvMzJ5cW1xem00andxZjI2OS9jbGllbnRfYXBpIiwiYXNzZXRzVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhdXRoVXJsIjoiaHR0cHM6Ly9hdXRoLnZlbm1vLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhbmFseXRpY3MiOnsidXJsIjoiaHR0cHM6Ly9jbGllbnQtYW5hbHl0aWNzLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20ifSwidGhyZWVEU2VjdXJlRW5hYmxlZCI6dHJ1ZSwidGhyZWVEU2VjdXJlIjp7Imxvb2t1cFVybCI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb206NDQzL21lcmNoYW50cy8zMnlxbXF6bTRqd3FmMjY5L3RocmVlX2Rfc2VjdXJlL2xvb2t1cCJ9LCJwYXlwYWxFbmFibGVkIjp0cnVlLCJwYXlwYWwiOnsiZGlzcGxheU5hbWUiOiJJbmRldmlkdWFsIiwiY2xpZW50SWQiOm51bGwsInByaXZhY3lVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vcHAiLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3RvcyIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImFsbG93SHR0cCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsImVudmlyb25tZW50Ijoib2ZmbGluZSIsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJicmFpbnRyZWVDbGllbnRJZCI6Im1hc3RlcmNsaWVudDMiLCJtZXJjaGFudEFjY291bnRJZCI6Im1ucmJjaHJ0NWhzODgzMnciLCJjdXJyZW5jeUlzb0NvZGUiOiJVU0QifSwiY29pbmJhc2VFbmFibGVkIjpmYWxzZSwibWVyY2hhbnRJZCI6IjMyeXFtcXptNGp3cWYyNjkiLCJ2ZW5tbyI6Im9mZiJ9";
-
 
 //braintree route handle functions
 exports.client_token = function(req, res){
@@ -24,33 +22,29 @@ exports.client_token = function(req, res){
 };
 
 exports.authorize = function(req, res){
-
-  var nonce = req.body.payment_method_nonce;
-  var campaignId = req.body.campaignId;
-  console.log(req.user);
-  console.log(campaignId);
-  var newParticipant = {
-    user_id         : req.user._id,
-    remainingAmount : 0,
-    paidAmount      : 0,
-    total           : 0,
-    nonce           : nonce
-  };
-  campaigns.findOneAndUpdate({_id:campaignId}, {$push:{participants:newParticipant}}, function(err, campaign){
-    users.findOneAndUpdate({_id:req.user._id, campaigns:{$ne:campaign._id}},{$push:{campaigns:campaign._id}},function(err, user){
-      gateway.transaction.sale({
-        amount: '10.00',
-        paymentMethodNonce: nonce,
-      }, function (err, result) {
-        console.log(result);
-      });
-      res.render('profile', {
-        step:3,
-        key : user.key,
-        widget : "code"
+  if(req.user){
+    var nonce = req.body.payment_method_nonce;
+    var campaignId = req.body.campaignId;
+    var newParticipant = {
+      user_id         : req.user._id,
+      remainingAmount : 0,
+      paidAmount      : 0,
+      total           : 0,
+      nonce           : nonce
+    };
+    campaigns.findOneAndUpdate({_id:campaignId}, {$push:{participants:newParticipant}}, function(err, campaign){
+      users.findOneAndUpdate({_id:req.user._id, campaigns:{$ne:campaign._id}},{$push:{campaigns:campaign._id}},function(err, user){
+        res.render('profile', {
+          step        :3,
+          key         : user.key,
+          campaignId  : campaignId,
+          widget      : "code"
+        });
       });
     });
-  });
+  }else{
+    return res.redirect('/login');
+  }
 };
   // var amount = "10.00"; //req.body.amount;
   // // Use payment method nonce here

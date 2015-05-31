@@ -41,8 +41,8 @@ exports.createUser = function(req, res){
 
   var mail = req.body.username.toLowerCase();
   var user = new users({
-    company     : req.body.company,
-    email        : mail,
+    company       : req.body.company,
+    email         : mail,
     password      : hash
   });
   users.findOne({email:mail}).exec(function(err, user_exists){
