@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+//braintree intergration
+var braintree = require('braintree');
+
+var gateway = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "32yqmqzm4jwqf269",
+  publicKey: "rpmzdgnrt2nzx2b3",
+  privateKey: "3507e86793b7bf1d5b35803558bed1a9"
+});
+
 //database
 var mongoose = require( 'mongoose' );
 var users  = mongoose.model( 'users', users );
@@ -32,7 +42,6 @@ router.post('/', function(req, res){
   				nonce = campaign.participants[i].nonce;
   			}
   		}
-
 
   		//push to campaign new participant
   		if(participant_iterator == undefined){
