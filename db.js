@@ -40,7 +40,6 @@ var campaigns = new Schema({
 	},
 	fundingGoal 	: Number,
 	funds					: Number,
-	subscribers 	: [String],
 	isActive			: { type: Boolean, default: true } 
 });
 
