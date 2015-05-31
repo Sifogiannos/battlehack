@@ -79,7 +79,7 @@ router.post('/', function(req, res){
 					  	if(!campaign){
 					  		return res.json({status:"error", message:"No campaign found"});
 					  	}
-					  	return res.json({status:"ok", message:"you have been charged for $" + amount.toFix(2)});
+					  	return res.json({status:"ok", message:"you have been charged for $" + amount});
 		  			});
 
   				}
