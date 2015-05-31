@@ -12,23 +12,32 @@
   </head>
 
   <body class="">
+  	<header class="bg-primary-color">
+	  	<div class="container">
+			<div class="brand">
+				<img src="/img/logo.png" alt="Littlebit">
+			</div>
+			<nav>
+				<ul>
+					<li>Log in page</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 	<div class="container">
 		<div class="login-wrapper">
-			<div class="bg-prm-color brand">
-				<img src="/img/logo.png" alt="littleBit logo">
-			</div>
-			<p>Login to your LittleBit Account</p>
+			<h3 class="login-title">Login to your LittleBit Account</h3>
 			<% if (message!=""){%>
 				<span id="error" class="error"><%= message %></span>
 			<%}%>
 			<form class="js-form" action="/login" method="post">
 				<input type="email" name="username" placeholder="Email" id="email">
 				<input type="password" name="password" placeholder="Password">
-				<button class="bg-prm-color" type="submit">SIGN IN</button>
+				<div class="buttons">
+					<button class="button button-primary" type="submit">SIGN IN</button>
+					<a href="/signup" class="right">Dont have an account? <span class="snd-color">Get started</span></a>
+				</div>
 			</form>
-			<div class="buttons">
-				<a href="/signup" class="right">Dont have an account? <span class="snd-color">Get started</span></a>
-			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>

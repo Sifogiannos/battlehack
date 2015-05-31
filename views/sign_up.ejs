@@ -12,18 +12,27 @@
   </head>
 
   <body class="">
+    <header class="bg-primary-color">
+	  	<div class="container">
+			<div class="brand">
+				<img src="/img/logo.png" alt="Littlebit">
+			</div>
+			<nav>
+				<ul>
+					<li>Log in page</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 	<div class="container">
 		<div class="login-wrapper">
-			<div class="bg-prm-color brand">
-				<img src="/img/logo.png" alt="littlebit logo">
-			</div>
-			<p>Sign up to get your account</p>
+			<h3 class="login-title">Sign up to get your account</h3>
 			<form class="js-form" action="/login" method="post">
 				
 				<input type="text" name="company" placeholder="Company name" required>
 				<input type="email" id="mail" name="username" pattern="[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" placeholder="Email" required>
 				<input type="password" name="password" placeholder="Password" required>
-				<button type="submit" class="bg-prm-color">SIGN UP</button>
+				<button type="submit" class="button button-primary">SIGN UP</button>
 			</form>
 			<div class="buttons">
 				<a href="/">Go back to Login page</a>

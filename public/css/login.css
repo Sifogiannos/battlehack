@@ -1,0 +1,10 @@
+form input{
+	margin-bottom:1em;
+}
+.login-title{
+	margin:1em 0;
+}
+.login-wrapper{
+	max-width:600px;
+	margin:0 auto;
+}
