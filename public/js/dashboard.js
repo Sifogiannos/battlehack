@@ -47,29 +47,36 @@ var ajax = function (args) {
 	var widget = paymentContainer.parentNode;
 
 	// Populate dashboard data from server
-		       $.ajax({ url: "/users", success: function(response) {
-	            loadCardData(response.data);
-	       }, dataType: "json", complete: poll });
-	function poll() {
-	   setTimeout(function() {
-	       $.ajax({ url: "/users", success: function(response) {
-	            loadCardData(response.data);
-	       }, dataType: "json", complete: poll });
-	    }, 30000);
-	};
-	function poll(){
-		$.ajax({
-			url: '/users'
-		})
-		.done(function(response) {
-			loadCardData(response.data);
-			console.log("success");
-			pollAgain();
-		});
-	}
-	function pollAgain(){
-		setTimeout(poll,3000);
-	}
+	var pusher = new Pusher('cd774e2b8a51f506bc9f');
+    var channel = pusher.subscribe('dashboard');
+    channel.bind('refresh', function(data) {
+      console.log(data);
+      loadCardData(data);
+    });
+
+	$.ajax({ url: "/users", success: function(response) {
+	    loadCardData(response.data);
+	}, dataType: "json"});
+	// function poll() {
+	//    setTimeout(function() {
+	//        $.ajax({ url: "/users", success: function(response) {
+	//             loadCardData(response.data);
+	//        }, dataType: "json", complete: poll });
+	//     }, 30000);
+	// };
+	// function poll(){
+	// 	$.ajax({
+	// 		url: '/users'
+	// 	})
+	// 	.done(function(response) {
+	// 		loadCardData(response.data);
+	// 		console.log("success");
+	// 		pollAgain();
+	// 	});
+	// }
+	// function pollAgain(){
+	// 	setTimeout(poll,3000);
+	// }
 	// var user = {
 	// 	name				: 'Cristiano',
 	// 	surname 		: 'Betta',

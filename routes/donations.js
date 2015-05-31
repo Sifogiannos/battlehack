@@ -73,7 +73,6 @@ router.post('/', function(req, res){
 
 			    //if transaction success
 			    if(result.success){
-            console.log("inside success");
             amount = parseInt(amount);
 		  			campaigns.findOneAndUpdate({_id:campaign._id, "participants.user_id":user._id}, {$inc:{"participants.$.total"	: amount, "participants.$.paidAmount"	: amount, funds:amount}}, function(err, campaign){
               
@@ -85,10 +84,15 @@ router.post('/', function(req, res){
 					  	}
 					  	//update user if the campaign is already exists
 				  		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()};
-				  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity},$set:{tokenLastActive:Date.now()}}, function(err){});
+
+              //Send data to dashboard
+
+              var populate = {path: 'campaigns', match: {isActive: true}};
+				  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity},$set:{tokenLastActive:Date.now()}},{new:true}).populate(populate).lean().exec(function(err,user){
 					  	
-					  	pusher.trigger('dashboard', 'refresh');
-							
+              var user = transformDashboardData(user);
+					  	pusher.trigger('dashboard', 'refresh',user);
+							});
 							return res.json({status:"ok", message:"you have been charged for $" + amount});
 		  			});
 
@@ -103,3 +107,31 @@ router.post('/', function(req, res){
 });
 
 module.exports = router;
+
+function transformDashboardData(user){
+  var remainingAmount = 0;
+  var paidAmount = 0;
+  var campaign = {};
+  //find the remainig amount to pay for the active campaign 
+  if(user.campaigns.length > 0){
+    for(var i = 0; i<user.campaigns[0].participants.length; i++){
+      if(user.campaigns[0].participants[i].user_id.equals(user._id)){
+        remainingAmount = user.campaigns[0].participants[i].remainingAmount;
+        paidAmount = user.campaigns[0].participants[i].paidAmount;
+      }
+    }
+  }
+
+  if(user.campaigns.length > 0){
+    delete user.campaigns[0].participants;
+    campaign =  user.campaigns[0];
+  }
+
+  delete user._id;
+  delete user.password;
+  delete user.campaigns;
+  user.campaign = campaign;
+  user.remainingAmount =  remainingAmount;
+  user.paidAmount =  paidAmount;
+  return user;
+}
