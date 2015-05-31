@@ -11,10 +11,10 @@ router.get('/', function(req, res, next) {
 	return res.render('basket');
 });
 router.post('/', function(req, res, next) {
-	if (req.body.amount) {
+	if (req.body.amount != 0) {
 		lb = new littlebit('71d36a87605fe0df9bb0ebb36a8e75da2592882c');
 		lb.donate(req.body.amount);
-		return res.json({status:"ok", message:"you have donated $" + amount.toFix(2)});
+		return res.json({status:"ok", message:"you have donated $" + req.body.amount});
 	}
 	return res.json({status:"ok"});
 });

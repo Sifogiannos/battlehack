@@ -98,11 +98,8 @@ form input{
   border-radius:4px;
   position:relative;
 }
-.button:hover{
-  top:2px;
-}
 .button:active{
-  top:4px;
+  top:2px;
 }
 .button-primary{
   color:#fff;
