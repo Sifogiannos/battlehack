@@ -135,8 +135,10 @@ var ajax = function (args) {
 		show_key = !show_key;
 		if (show_key) {
 			$('#api-key').removeClass('hide');
+			payButton.textContent = 'Hide API Key';
 		} else {
 			$('#api-key').addClass('hide');
+			payButton.textContent = 'Show API Key';
 		}
 	});
 })();
