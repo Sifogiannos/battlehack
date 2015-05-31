@@ -20,4 +20,7 @@ checkout.addEventListener('click', function () {
       amount: willDonate ? 1 : 0,
     },
   })
+  .done(function(){
+    alert("Thank you for helping out!");
+  });
 });
