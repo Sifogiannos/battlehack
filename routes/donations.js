@@ -30,7 +30,7 @@ router.post('/', function(req, res){
   	}
 
   	campaigns.findOne({isActive:true}, function(err, campaign){
-  		
+
   		if(!campaign){
   			return res.json({status:"error", message:"No campaign active"});
   		}
@@ -68,7 +68,6 @@ router.post('/', function(req, res){
 		  			var newProperties = {
 		  				"participants.$.paidAmount"	: amount,
 		  				"participants.$.total"			: amount,
-		  				fundingGoal 								: amount*(-1),
 		  				funds												: amount
 		  			};
 
