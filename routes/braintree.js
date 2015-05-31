@@ -31,7 +31,8 @@ exports.authorize = function(req, res){
       paymentMethodNonce: nonce
     }, function (err, result) {
       result.success;
-      console.log(result);
+      console.log("paypal accounts")
+      console.log(result.customer.paypalAccounts);
       customerId = result.customer.id;
       console.log(customerId);
       var newParticipant = {
