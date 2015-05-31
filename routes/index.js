@@ -22,10 +22,11 @@ router.get('/', function(req, res, next) {
 	      widget      : "code"
 			});
 		});
+	}else{
+		return res.render('sign_in',{
+	    message: req.flash('error')
+	  });
 	}
-  return res.render('sign_in',{
-    message: req.flash('error')
-  });
 
 });
 router.get('/welcome', function(req, res, next) {
