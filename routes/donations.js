@@ -47,12 +47,16 @@ router.post('/', function(req, res){
 			    if(err){
 			      return res.json(err);
 			    }
+			    //if transaction success
 			    if(result.success){
 
 		  			var newProperties = {
-		  				"participants.$.remainingAmount"	: amount,
-		  				"participants.$.total"						: amount
+		  				"participants.$.paidAmount"	: amount,
+		  				"participants.$.total"			: amount,
+		  				fundingGoal 								: amount*(-1),
+		  				funds												: amount
 		  			};
+
 		  			campaigns.findOneAndUpdate({_id:campaign._id, "participants.user_id":user._id}, {$inc:newProperties}, function(err, campaign){
 		  				if(err){
 					  		return res.json({status:"error", message:"server error"});
@@ -62,6 +66,7 @@ router.post('/', function(req, res){
 					  	}
 					  	return res.json({status:"ok", message:"you have been charged for $" + amount.toFix(2)});
 		  			});
+
   				}
 			  });
   		}
