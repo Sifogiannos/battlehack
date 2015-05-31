@@ -134,7 +134,8 @@ var ajax = function (args) {
 		lQ('#api-key').textContent = user.key;
 
 		// Activity shit
-		var ul = lQ('.activity-list');
+		var ul = lQ('.activity-list')
+		ul.innerHTML = '';
 		user.activity.forEach(function (item) {
 			var li = Element({
 				tag: 'li',
