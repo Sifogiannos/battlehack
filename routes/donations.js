@@ -11,6 +11,17 @@ var gateway = braintree.connect({
   privateKey: "3507e86793b7bf1d5b35803558bed1a9"
 });
 
+
+//pusher intergration
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+  appId: '122455',
+  key: 'cd774e2b8a51f506bc9f',
+  secret: 'c655051d34b700c1428d'
+});
+
+
 //database
 var mongoose = require( 'mongoose' );
 var users  = mongoose.model( 'users', users );
@@ -75,7 +86,10 @@ router.post('/', function(req, res){
 					  	//update user if the campaign is already exists
 				  		var activity = {title:"A user donated " + amount + " $ through your website.", when: Date.now()};
 				  		users.findOneAndUpdate({_id:user._id}, {$push:{activity:activity},$set:{tokenLastActive:Date.now()}}, function(err){});
-					  	return res.json({status:"ok", message:"you have been charged for $" + amount});
+					  	
+					  	pusher.trigger('dashboard', 'refresh');
+							
+							return res.json({status:"ok", message:"you have been charged for $" + amount});
 		  			});
 
   				}

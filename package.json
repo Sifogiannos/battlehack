@@ -18,7 +18,8 @@
     "passport-local"  : "*",
     "connect-flash"   : "*",
     "express-session" : "*",
-    "braintree"       : "*"
+    "braintree"       : "*",
+    "pusher"          : "*"
   },
   "devDependencies": {
     "gulp-livereload": "^3.8.0"
