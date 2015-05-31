@@ -48,15 +48,21 @@ router.post('/', function(req, res){
   			}
   		}
       console.log(nonce);
+      gateway.customer.update(campaign.participants[participant_iterator].customerId, {
+      }, function (err, result) {
+        console.log(result);
+        console.log(result.customer.paymentMethods);
+      });
   		//push to campaign new participant
   		if(participant_iterator == undefined){
   			return res.json({status:"error", message:"No campaign found"});
   		}else{
         console.log(amount);
 			  // Use payment method nonce here
+        //return res.end();
 			  gateway.transaction.sale({
 			    amount: amount,
-			    paymentMethodNonce: nonce
+			    paymentMethodNonce: 'fake-valid-nonce'
 			  }, function (err, result){
 			    if(err){
 			      return res.json(err);

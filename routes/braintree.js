@@ -24,20 +24,32 @@ exports.authorize = function(req, res){
   if(req.user){
     var nonce = req.body.payment_method_nonce;
     var campaignId = req.body.campaignId;
-    var newParticipant = {
-      user_id         : req.user._id,
-      remainingAmount : 0,
-      paidAmount      : 0,
-      total           : 0,
-      nonce           : nonce
-    };
-    campaigns.findOneAndUpdate({_id:campaignId}, {$push:{participants:newParticipant}}, function(err, campaign){
-      users.findOneAndUpdate({_id:req.user._id, campaigns:{$ne:campaign._id}},{$push:{campaigns:campaign._id}},function(err, user){
-        return res.render('profile', {
-          step        : 3,
-          key         : user.key,
-          campaignId  : campaignId,
-          widget      : "code"
+    var customerId;
+    gateway.customer.create({
+      firstName: "Charity",
+      lastName: "Doe",
+      paymentMethodNonce: nonce
+    }, function (err, result) {
+      result.success;
+      console.log(result);
+      customerId = result.customer.id;
+      console.log(customerId);
+      var newParticipant = {
+        user_id         : req.user._id,
+        remainingAmount : 0,
+        paidAmount      : 0,
+        total           : 0,
+        nonce           : nonce,
+        customerId      : customerId
+      };
+      campaigns.findOneAndUpdate({_id:campaignId}, {$push:{participants:newParticipant}}, function(err, campaign){
+        users.findOneAndUpdate({_id:req.user._id, campaigns:{$ne:campaign._id}},{$push:{campaigns:campaign._id}},function(err, user){
+          return res.render('profile', {
+            step        : 3,
+            key         : user.key,
+            campaignId  : campaignId,
+            widget      : "code"
+          });
         });
       });
     });
