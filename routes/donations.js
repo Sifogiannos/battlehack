@@ -27,10 +27,10 @@ var mongoose = require( 'mongoose' );
 var users  = mongoose.model( 'users', users );
 var campaigns = mongoose.model( 'campaigns', campaigns );
 
-router.get('/', function(req, res){
+router.post('/', function(req, res){
 
-  var key = "75c44e0062975b60fc3869f053037757b3a29402";//req.body.api_key;
-  var amount = 10;//req.body.amount;
+  var key = req.body.api_key;
+  var amount = req.body.amount;
 
   users.findOne({key:key}, function(err, user){
   	if(err){
@@ -66,12 +66,14 @@ router.get('/', function(req, res){
 			    amount: amount,
 			    paymentMethodNonce: 'fake-valid-nonce'
 			  }, function (err, result){
+          console.log(err);
 			    if(err){
 			      return res.json(err);
 			    }
 
 			    //if transaction success
 			    if(result.success){
+            console.log("inside success");
             amount = parseInt(amount);
 		  			campaigns.findOneAndUpdate({_id:campaign._id, "participants.user_id":user._id}, {$inc:{"participants.$.total"	: amount, "participants.$.paidAmount"	: amount, funds:amount}}, function(err, campaign){
               
@@ -91,6 +93,9 @@ router.get('/', function(req, res){
 		  			});
 
   				}
+          else{
+            console.log(result);
+          }
 			  });
   		}
   	});
