@@ -23,6 +23,8 @@ header{
     margin-left: 420px;
     overflow: hidden;
     position: absolute;
+    left:0;
+    right:0;
 }
 .notification{
 	display:table;
